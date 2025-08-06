@@ -1,4 +1,4 @@
-# DexQuest Client
+# Digital Garden Client
 
 A full-stack web application built using React, TypeScript, Zustand, and Vite.
 
