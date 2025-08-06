@@ -84,7 +84,7 @@ export const seeds: Seed[] = [
         rarity: 'common',
         sellPrice: 15,
         buyPrice: seedPrice,
-        unlockPrice: 5,
+        unlockPrice: 50,
         locked: true,
     },
     {
