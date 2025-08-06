@@ -1,0 +1,1 @@
+export type YieldType = 'sunflower' | 'tulip' | 'rose' | 'lavender' | 'daisy' | 'cactus' | 'bonsai'

@@ -1,0 +1,1 @@
+export type ShopRemovalActions = 'discard' | 'unstock' | 'sell'

@@ -1,0 +1,1 @@
+export type ToolBeltNameTypes = 'plant-seed' | 'harvest-plant' | 'water-plant' | 'show-inventory'

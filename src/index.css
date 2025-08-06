@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+:root {
+  /* Light Theme - Day Mode */
+  --bg-primary:       #F6F1EA;
+  --bg-secondary:     #E3DACF;
+  --bg-dialog:        #fdf6e3;
+  --text-primary:     #3E3A33;
+  --text-muted:       #7A6F63;
+  --accent-green:     #6FA86E;
+  --accent-yellow:    #FFD95A;
+  --border:           #D4C9BA;
+  --border-dialog:    #5a3d2b;
+  --soil:             #A37955;
+
+  /* Shared Accent Colors (used in both themes) */
+  --accent-purple:    #C97DCF;
+  --currency-gold:    #FFC857;
+  --accent-mint:      #B6F2D5;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Amatic SC', cursive;
+}
+
+p {
+  margin: 0;
+}
+
+/* Dark Theme - Night Mode */
+[data-theme="dark"] {
+  --bg-primary:       #1C1B18;
+  --bg-secondary:     #292824;
+  --text-primary:     #E8E3DC;
+  --text-muted:       #A09A91;
+  --accent-green:     #6FA86E;  /* Same as light for consistency */
+  --accent-yellow:    #F5C244;
+  --border:           #3B3A36;
+  --soil:             #735A3C;
+}
+
+@theme {
+  /* --container-desktop-width: 1000px; */
+  --spacing-desktop-width: 1000px;
+  --spacing-desktop-height: 600px;
+  --spacing-desk-width: 390px;
+  --spacing-one-hundred: 100px;
+  --spacing-one-thirty: 130px;
+  --spacing-two-hundred-ten: 210px;
+  --spacing-three-fifty-four: 354px;
+  --spacing-five-hundred: 500px;
+  --spacing-thirty: 30px;
+  --spacing-thirty-five: 35px;
+  --spacing-thirty-percent: 30%;
+  --spacing-fourty-percent: 40%;
+  --spacing-fifty-percent: 50%;
+  --spacing-fifty-five-percent: 55%;
+  --spacing-sixty-five-percent: 65%;
+  --spacing-seventy-seven-percent: 77%;
+  --spacing-hundred-fifteen-percent: 115%;
+  --spacing-hundred-thirty-percent: 130%;
+  --spacing-two-fifty-five-percent: 255%;
+  --radius-twenty: 20px;
+  --text-ten: 10px;
+  --text-thirteen: 13px;
+}
+
+.bg-splash {
+  background-image: url('./assets/backdrops/splash.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.bg-greenhouse {
+  background-image: url('./assets/backdrops/green-house.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.bg-garden {
+  background-image: url('./assets/backdrops/garden.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.bg-forest {
+  background-image: url('./assets/background/background.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.bg-shop {
+  background-image: url('./assets/backdrops/shop.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.custom-cursor,
+.custom-cursor * {
+  cursor: none !important;
+}

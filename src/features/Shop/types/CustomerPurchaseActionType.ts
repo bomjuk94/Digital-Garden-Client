@@ -1,0 +1,1 @@
+export type CustomerPurchaseAction = 'sell' | 'decline'

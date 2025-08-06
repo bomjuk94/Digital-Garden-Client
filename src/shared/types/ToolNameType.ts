@@ -1,0 +1,1 @@
+export type ToolName = 'harvest-plant' | 'water-plant' | 'boostYield' | 'boostYieldTimed' | 'boostGrowth';

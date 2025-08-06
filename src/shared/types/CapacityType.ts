@@ -1,0 +1,1 @@
+export type CapcityType = 'increment' | 'decrement'
