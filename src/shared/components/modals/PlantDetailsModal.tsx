@@ -36,9 +36,7 @@ const PlantDetailsModal = ({ plant, onPlantDetailsClose }: PlantDetailsModalProp
 
                     <div
                         className="
-                        w-[53px] h-[94px] border 
-                        border-red-500
-                        cursor-pointer
+                        w-[53px] h-[94px] cursor-pointer
                         "
                         style={getSpriteStyle(growthPhaseMap['bloom'], plant!)}
                     >

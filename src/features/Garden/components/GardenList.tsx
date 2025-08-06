@@ -43,8 +43,7 @@ const GardenList = ({ garden }: GardenListProps) => {
                             <button
                                 onClick={() => handlePlantClick(i)}
                                 className="
-                                w-[53px] h-[94px] border 
-                                border-red-500
+                                w-[53px] h-[94px]
                                 cursor-pointer
                                 "
                                 style={getSpriteStyle(growthPhaseMap['bloom'], plant)}
