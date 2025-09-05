@@ -5,6 +5,7 @@ import UserForm from "../components/UserForm";
 import { useUserModeStore } from '@/shared/stores/useUserModeStore'
 import { useTutorialStore } from "@/shared/stores/useTutorialStore";
 import { useToolsStore } from "@/shared/stores/useToolsStore";
+import { Helmet } from 'react-helmet'
 
 const Splash = () => {
 
@@ -26,35 +27,43 @@ const Splash = () => {
     }, [resetCursor])
 
     return (
-        <div className='bg-[var(--bg-primary)] h-dvh flex flex-col justify-center'>
-            <div className='min-w-desktop-width max-w-desktop-width min-h-desktop-height max-h-desktop-height mx-auto bg-splash rounded-twenty relative'>
+        <>
+            <Helmet>
+                <title>Home - Digital Garden</title>
+                <meta name="description" content="Welcome to Digital Garden — a cozy simulation game where you grow plants, manage resources, and watch your garden flourish over time." />
+            </Helmet>
 
-                {
-                    !userMode &&
-                    <div className="flex gap-3 items-center justify-center absolute top-sixty-five-percent left-0 right-0">
-                        <button
-                            onClick={(e) => handleSplashBtn(e)}
-                            value={'registered'}
-                            className="bg-[var(--soil)] hover:bg-[var(--accent-mint)] text-[var(--bg-primary)] hover:text-[var(--text-primary)] font-medium px-5 py-2.5 rounded-lg border border-[var(--border)] shadow-sm transition duration-200 ease-in-out cursor-pointer"
-                        >
-                            Login /Register
-                        </button>
+            <div className='bg-[var(--bg-primary)] h-dvh flex flex-col justify-center'>
+                <div className='min-w-desktop-width max-w-desktop-width min-h-desktop-height max-h-desktop-height mx-auto bg-splash rounded-twenty relative'>
 
-                        <button
-                            onClick={(e) => handleSplashBtn(e)}
-                            value={'guest'}
-                            className="bg-[var(--soil)] hover:bg-[var(--accent-mint)] text-[var(--bg-primary)] hover:text-[var(--text-primary)] font-medium px-5 py-2.5 rounded-lg border border-[var(--border)] shadow-sm transition duration-200 ease-in-out cursor-pointer">
-                            Continue as Guest
-                        </button>
-                    </div>
-                }
-                {
-                    userMode && (
-                        userMode === 'guest' ? <GuestForm /> : <UserForm />
-                    )
-                }
+                    {
+                        !userMode &&
+                        <div className="flex gap-3 items-center justify-center absolute top-sixty-five-percent left-0 right-0">
+                            <button
+                                onClick={(e) => handleSplashBtn(e)}
+                                value={'registered'}
+                                className="bg-[var(--soil)] hover:bg-[var(--accent-mint)] text-[var(--bg-primary)] hover:text-[var(--text-primary)] font-medium px-5 py-2.5 rounded-lg border border-[var(--border)] shadow-sm transition duration-200 ease-in-out cursor-pointer"
+                            >
+                                Login /Register
+                            </button>
+
+                            <button
+                                onClick={(e) => handleSplashBtn(e)}
+                                value={'guest'}
+                                className="bg-[var(--soil)] hover:bg-[var(--accent-mint)] text-[var(--bg-primary)] hover:text-[var(--text-primary)] font-medium px-5 py-2.5 rounded-lg border border-[var(--border)] shadow-sm transition duration-200 ease-in-out cursor-pointer">
+                                Continue as Guest
+                            </button>
+                        </div>
+                    }
+                    {
+                        userMode && (
+                            userMode === 'guest' ? <GuestForm /> : <UserForm />
+                        )
+                    }
+                </div>
             </div>
-        </div>
+        </>
+
     )
 }
 

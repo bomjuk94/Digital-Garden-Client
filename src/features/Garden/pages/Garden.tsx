@@ -15,6 +15,7 @@ import { useGetGarden } from "@/shared/hooks/useGetGarden"
 import { useGetInventory } from "@/shared/hooks/useGetInventory"
 import { useGetPurchases } from "@/shared/hooks/useGetPurchases"
 import { useGardenActions } from "@/shared/hooks/garden/useGardenActions"
+import HelmetExport, { Helmet } from "react-helmet"
 
 const Garden = () => {
 
@@ -39,53 +40,60 @@ const Garden = () => {
     if (error || loading) return
 
     return (
-        <div className='bg-[var(--bg-primary)] h-dvh flex flex-col justify-center relative bg-forest'>
-            <div
-                className='min-w-desktop-width max-w-desktop-width min-h-desktop-height max-h-desktop-height mx-auto bg-garden rounded-twenty relative overflow-visible bg-[var(--bg-primary)]'>
+        <>
+            <Helmet>
+                <title>Garden - Digital Garden</title>
+                <meta name="description" content="Showcase your blooms and manage overflow in the Garden. Expand your plot, harvest plants, and see your collection thrive." />
+            </Helmet>
 
-                <p className='absolute top-2 left-2 bg-[var(--bg-primary)] py-1 px-2.5 rounded-twenty text-sm'>
-                    ${
-                        profile &&
-                        profile.balance
+            <div className='bg-[var(--bg-primary)] h-dvh flex flex-col justify-center relative bg-forest'>
+                <div
+                    className='min-w-desktop-width max-w-desktop-width min-h-desktop-height max-h-desktop-height mx-auto bg-garden rounded-twenty relative overflow-visible bg-[var(--bg-primary)]'>
+
+                    <p className='absolute top-2 left-2 bg-[var(--bg-primary)] py-1 px-2.5 rounded-twenty text-sm'>
+                        ${
+                            profile &&
+                            profile.balance
+                        }
+                    </p>
+
+                    <GardenList garden={garden} />
+                    {
+                        activeModal === 'inventory' && <InventoryModal inventory={inventory} />
                     }
-                </p>
 
-                <GardenList garden={garden} />
-                {
-                    activeModal === 'inventory' && <InventoryModal inventory={inventory} />
-                }
+                    {
+                        activeModal === 'instructions' && <GardenInstructionsModal onClose={toggleModal} activeModal={activeModal} />
+                    }
 
-                {
-                    activeModal === 'instructions' && <GardenInstructionsModal onClose={toggleModal} activeModal={activeModal} />
-                }
+                    {
+                        activeModal === 'receipt' && <ReceiptModal receipts={purchases} />
+                    }
 
-                {
-                    activeModal === 'receipt' && <ReceiptModal receipts={purchases} />
-                }
+                    {
+                        activeModal === 'store' && <StoreModal />
+                    }
 
-                {
-                    activeModal === 'store' && <StoreModal />
-                }
-
-                <div className='absolute bottom-2 right-2'>
-                    <div className='flex flex-col gap-1.5'>
-                        <InventoryIcon />
-                        <NavigationIcon />
-                        <StoreIcon />
-                        <ReceiptIcon />
-                        <InstructionsIcon />
+                    <div className='absolute bottom-2 right-2'>
+                        <div className='flex flex-col gap-1.5'>
+                            <InventoryIcon />
+                            <NavigationIcon />
+                            <StoreIcon />
+                            <ReceiptIcon />
+                            <InstructionsIcon />
+                        </div>
                     </div>
-                </div>
 
-                {
-                    showPlantDetails &&
-                    <PlantDetailsModal
-                        plant={plantDetails}
-                        onPlantDetailsClose={onPlantDetailsClose}
-                    />
-                }
+                    {
+                        showPlantDetails &&
+                        <PlantDetailsModal
+                            plant={plantDetails}
+                            onPlantDetailsClose={onPlantDetailsClose}
+                        />
+                    }
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -24,6 +24,7 @@ import { useGetUserProfile } from '@/shared/hooks/useGetUserProfile'
 import { useGetSeeds } from '@/shared/hooks/useGetSeeds'
 import { useGetPurchases } from '@/shared/hooks/useGetPurchases'
 import { useGetPlants } from '@/shared/hooks/useGetPlants'
+import { Helmet } from 'react-helmet'
 
 const GreenHouse = () => {
 
@@ -56,74 +57,81 @@ const GreenHouse = () => {
     if (!profile || !seeds || !purchases || !plants || !toolsHydated) return
 
     return (
-        <div className='bg-[var(--bg-primary)] h-dvh flex flex-col justify-center relative bg-forest'>
-            <div
-                data-tutorial-id="greenhouse-backdrop"
-                className='min-w-desktop-width max-w-desktop-width min-h-desktop-height max-h-desktop-height mx-auto bg-greenhouse rounded-twenty relative overflow-visible bg-[var(--bg-primary)]'>
+        <>
+            <Helmet>
+                <title>Green House - Digital Garden</title>
+                <meta name="description" content="Plant seeds, nurture growth stages, and unlock unique plants in the Greenhouse — the heart of your Digital Garden journey." />
+            </Helmet>
 
-                <p className='absolute top-2 left-2 bg-[var(--bg-primary)] py-1 px-2.5 rounded-twenty text-sm'>
-                    ${
-                        profile &&
-                        profile.balance
+            <div className='bg-[var(--bg-primary)] h-dvh flex flex-col justify-center relative bg-forest'>
+                <div
+                    data-tutorial-id="greenhouse-backdrop"
+                    className='min-w-desktop-width max-w-desktop-width min-h-desktop-height max-h-desktop-height mx-auto bg-greenhouse rounded-twenty relative overflow-visible bg-[var(--bg-primary)]'>
+
+                    <p className='absolute top-2 left-2 bg-[var(--bg-primary)] py-1 px-2.5 rounded-twenty text-sm'>
+                        ${
+                            profile &&
+                            profile.balance
+                        }
+                    </p>
+
+                    <img
+                        src={desk}
+                        alt="desk"
+                        data-tutorial-id="greenhouse-desk"
+                        className='absolute bottom-2 left-1/2 transform -translate-x-fifty-percent w-desk-width pointer-events-none'
+                    />
+
+                    <ToolBelt toolbeltActions={toolbeltActions} />
+
+                    {
+                        activeModal === 'seeds' && <SeedsList seeds={seeds} />
                     }
-                </p>
 
-                <img
-                    src={desk}
-                    alt="desk"
-                    data-tutorial-id="greenhouse-desk"
-                    className='absolute bottom-2 left-1/2 transform -translate-x-fifty-percent w-desk-width pointer-events-none'
-                />
+                    {
+                        activeModal === 'inventory' && <InventoryModal />
+                    }
 
-                <ToolBelt toolbeltActions={toolbeltActions} />
+                    {showWelcome && (
+                        <WelcomeModal onClose={onClose} />
+                    )}
 
-                {
-                    activeModal === 'seeds' && <SeedsList seeds={seeds} />
-                }
+                    {
+                        activeModal === 'instructions' && <InstructionsModal onClose={toggleModal} activeModal={activeModal} />
+                    }
 
-                {
-                    activeModal === 'inventory' && <InventoryModal />
-                }
+                    {
+                        activeModal === 'receipt' && <ReceiptModal receipts={purchases} />
+                    }
 
-                {showWelcome && (
-                    <WelcomeModal onClose={onClose} />
-                )}
+                    {
+                        activeModal === 'store' && <StoreModal />
+                    }
 
-                {
-                    activeModal === 'instructions' && <InstructionsModal onClose={toggleModal} activeModal={activeModal} />
-                }
+                    {
+                        showSeedDetails &&
+                        <SeedDetailsModal seed={seedDetails} onSeedDetailsClose={onSeedDetailsClose} />
+                    }
 
-                {
-                    activeModal === 'receipt' && <ReceiptModal receipts={purchases} />
-                }
+                    {
+                        activeModal === 'plantBuffs' &&
+                        <PlantBuffsModal />
+                    }
 
-                {
-                    activeModal === 'store' && <StoreModal />
-                }
+                    <PlantsList plants={plants} />
 
-                {
-                    showSeedDetails &&
-                    <SeedDetailsModal seed={seedDetails} onSeedDetailsClose={onSeedDetailsClose} />
-                }
-
-                {
-                    activeModal === 'plantBuffs' &&
-                    <PlantBuffsModal />
-                }
-
-                <PlantsList plants={plants} />
-
-                <div className='absolute bottom-2 right-2'>
-                    <div className='flex flex-col gap-1.5'>
-                        <InventoryIcon />
-                        <NavigationIcon />
-                        <StoreIcon />
-                        <ReceiptIcon />
-                        <InstructionsIcon />
+                    <div className='absolute bottom-2 right-2'>
+                        <div className='flex flex-col gap-1.5'>
+                            <InventoryIcon />
+                            <NavigationIcon />
+                            <StoreIcon />
+                            <ReceiptIcon />
+                            <InstructionsIcon />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

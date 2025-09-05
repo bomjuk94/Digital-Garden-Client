@@ -21,6 +21,7 @@ import { useGetUserProfile } from "@/shared/hooks/useGetUserProfile"
 import { useGetInventory } from "@/shared/hooks/useGetInventory"
 import { useGetPurchases } from "@/shared/hooks/useGetPurchases"
 import { useGetShop } from "@/shared/hooks/shop/useGetShop"
+import { Helmet } from "react-helmet"
 
 const Shop = () => {
 
@@ -57,64 +58,72 @@ const Shop = () => {
     useShowPassiveSales(purchases, profile)
 
     return (
-        <div className='bg-[var(--bg-primary)] h-dvh flex flex-col justify-center relative bg-forest'>
-            <div
-                className='min-w-desktop-width max-w-desktop-width min-h-desktop-height max-h-desktop-height mx-auto bg-shop rounded-twenty relative overflow-visible bg-[var(--bg-primary)]'>
+        <>
+            <Helmet>
+                <title>Shop - Digital Garden</title>
+                <meta name="description" content="Visit the Shop to buy seeds, upgrades, and supplies. Boost growth, increase yields, and expand your Digital Garden adventure.">
+                </meta>
+            </Helmet>
 
-                <p className='absolute top-2 left-2 bg-[var(--bg-primary)] py-1 px-2.5 rounded-twenty text-sm'>
-                    ${
-                        profile &&
-                        profile.balance
+            <div className='bg-[var(--bg-primary)] h-dvh flex flex-col justify-center relative bg-forest'>
+                <div
+                    className='min-w-desktop-width max-w-desktop-width min-h-desktop-height max-h-desktop-height mx-auto bg-shop rounded-twenty relative overflow-visible bg-[var(--bg-primary)]'>
+
+                    <p className='absolute top-2 left-2 bg-[var(--bg-primary)] py-1 px-2.5 rounded-twenty text-sm'>
+                        ${
+                            profile &&
+                            profile.balance
+                        }
+                    </p>
+
+                    {
+                        activeModal === 'inventory' && <InventoryModal inventory={inventory} />
                     }
-                </p>
 
-                {
-                    activeModal === 'inventory' && <InventoryModal inventory={inventory} />
-                }
+                    {
+                        activeModal === 'shop' && <ShopListModal onClose={toggleModal} activeModal={activeModal} shop={shop} />
+                    }
 
-                {
-                    activeModal === 'shop' && <ShopListModal onClose={toggleModal} activeModal={activeModal} shop={shop} />
-                }
+                    {
+                        activeModal === 'instructions' && <ShopInstructionsModal onClose={toggleModal} activeModal={activeModal} />
+                    }
 
-                {
-                    activeModal === 'instructions' && <ShopInstructionsModal onClose={toggleModal} activeModal={activeModal} />
-                }
+                    {
+                        (activeModal === 'plantDetails' && showPlantDetails) &&
+                        <PlantDetailsModal plant={plantDetails} onPlantDetailsClose={onPlantDetailsClose} />
+                    }
 
-                {
-                    (activeModal === 'plantDetails' && showPlantDetails) &&
-                    <PlantDetailsModal plant={plantDetails} onPlantDetailsClose={onPlantDetailsClose} />
-                }
+                    {
+                        (activeModal === 'plantManager' && showPlantManagerDetails) &&
+                        <PlantManagerModal plant={plantManagerDetails} onPlantManagerDetailsClose={onPlantManagerDetailsClose} />
+                    }
 
-                {
-                    (activeModal === 'plantManager' && showPlantManagerDetails) &&
-                    <PlantManagerModal plant={plantManagerDetails} onPlantManagerDetailsClose={onPlantManagerDetailsClose} />
-                }
+                    {
+                        activeModal === 'receipt' && <ReceiptModal receipts={purchases} />
+                    }
 
-                {
-                    activeModal === 'receipt' && <ReceiptModal receipts={purchases} />
-                }
+                    {
+                        activeModal === 'store' && <StoreModal />
+                    }
 
-                {
-                    activeModal === 'store' && <StoreModal />
-                }
+                    {
+                        customer &&
+                        <Customer customer={customer} />
+                    }
 
-                {
-                    customer &&
-                    <Customer customer={customer} />
-                }
-
-                <div className='absolute bottom-2 right-2'>
-                    <div className='flex flex-col gap-1.5'>
-                        <InventoryIcon />
-                        <NavigationIcon />
-                        <ShopIcon />
-                        <StoreIcon />
-                        <ReceiptIcon />
-                        <InstructionsIcon />
+                    <div className='absolute bottom-2 right-2'>
+                        <div className='flex flex-col gap-1.5'>
+                            <InventoryIcon />
+                            <NavigationIcon />
+                            <ShopIcon />
+                            <StoreIcon />
+                            <ReceiptIcon />
+                            <InstructionsIcon />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
